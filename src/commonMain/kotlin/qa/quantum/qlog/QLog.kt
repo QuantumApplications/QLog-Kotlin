@@ -1,11 +1,41 @@
+@file:Suppress("FunctionName")
+
 package qa.quantum.qlog
 
-expect class QLog() {
-    fun checkMe(): Int
+import qa.quantum.qlog.logger.LogEntry
+import qa.quantum.qlog.logger.Logger
+
+/**
+Global static class to hold all log settings
+ */
+class QLog {
+
+    companion object {
+
+        var loggers = mutableListOf<Logger>()
+
+        /**
+        Logs a log entry to all attached loggers
+        - parameter logEntry: The log entry
+         */
+        fun log(logEntry: LogEntry) {
+            for (logger in this.loggers) {
+                logger.log(logEntry)
+            }
+        }
+
+    }
+
 }
 
-expect object Platform {
-    val name: String
-}
+// Static error functions
 
-fun hello(): String = "Hello from ${Platform.name}"
+expect fun <T> QLogHighlight(loggedObject: T)
+
+expect fun <T> QLogDebug(loggedObject: T)
+
+expect fun <T> QLogInfo(loggedObject: T)
+
+expect fun <T> QLogWarning(loggedObject: T)
+
+expect fun <T> QLogError(loggedObject: T)

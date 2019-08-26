@@ -1,9 +1,18 @@
+@file:Suppress("FunctionName")
+
 package qa.quantum.qlog
 
-actual class QLog {
-    actual fun checkMe() = 12
+actual fun <T> QLogHighlight(loggedObject: T) {
 }
 
-actual object Platform {
-    actual val name: String = "JS"
+actual fun <T> QLogDebug(loggedObject: T) {
+}
+
+actual fun <T> QLogInfo(loggedObject: T) {
+}
+
+actual fun <T> QLogWarning(loggedObject: T) {
+}
+
+actual fun <T> QLogError(loggedObject: T) {
 }
